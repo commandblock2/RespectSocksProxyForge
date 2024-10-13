@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.whatever.respect_socks5_options.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "ConnectionMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
