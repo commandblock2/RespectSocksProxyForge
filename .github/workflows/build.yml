@@ -31,3 +31,10 @@ jobs:
         run: |
           ulimit -n 65535 || ulimit -n 4096 || true
           ./gradlew --no-daemon build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: respect-socks5-options-jars
+          path: build/libs/*.jar
+          if-no-files-found: error
