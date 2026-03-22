@@ -15,6 +15,9 @@ base {
 // Mojang ships Java 17 to end users in 1.18+, so your mod should target Java 17.
 java.toolchain.languageVersion = JavaLanguageVersion.of(17)
 
+// Enable Forge Jar-in-Jar for runtime libs we need inside the mod jar.
+jarJar.enable()
+
 println "Java: ${System.getProperty 'java.version'}, JVM: ${System.getProperty 'java.vm.version'} (${System.getProperty 'java.vendor'}), Arch: ${System.getProperty 'os.arch'}"
 minecraft {
     mappings channel: 'official', version: '1.20.1'
@@ -86,8 +89,13 @@ repositories {
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.16'
 
-    // Netty proxy handler is in a separate artifact.
-    implementation 'io.netty:netty-handler-proxy:4.1.82.Final'
+    // Bundle the Netty SOCKS proxy handler stack in the mod jar.
+    jarJar(group: 'io.netty', name: 'netty-handler-proxy', version: '[4.1.82.Final,5.0)') {
+        jarJar.pin(it, '4.1.82.Final')
+    }
+    jarJar(group: 'io.netty', name: 'netty-codec-socks', version: '[4.1.82.Final,5.0)') {
+        jarJar.pin(it, '4.1.82.Final')
+    }
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
