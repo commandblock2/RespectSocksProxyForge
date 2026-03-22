@@ -12,7 +12,7 @@ import java.net.InetSocketAddress;
 @Mixin(targets = "net.minecraft.network.Connection$1")
 public class ConnectionMixin {
 
-    @Inject(method = "initChannel", at = @At("HEAD"))
+    @Inject(method = "initChannel", at = @At("HEAD"), remap = false)
     private void injectProxyHandler(Channel channel, CallbackInfo ci) {
         String host = System.getProperty("socksProxyHost");
         if (host == null || host.isBlank()) {

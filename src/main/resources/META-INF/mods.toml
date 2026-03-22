@@ -1,5 +1,5 @@
 modLoader="javafml"
-loaderVersion="[52,)"
+loaderVersion="[47,)"
 license="GPLv3"
 
 [[mods]]
@@ -17,13 +17,13 @@ This mod respects -DsocksProxyHost and -DsocksProxyPort.
 [[dependencies.respect_socks5_options]]
     modId="forge"
     mandatory=true
-    versionRange="[52,)"
+    versionRange="[47,)"
     ordering="NONE"
     side="BOTH"
 
 [[dependencies.respect_socks5_options]]
     modId="minecraft"
     mandatory=true
-    versionRange="[1.21.1,1.22)"
+    versionRange="[1.20.1,1.21)"
     ordering="NONE"
     side="BOTH"
