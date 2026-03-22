@@ -14,14 +14,12 @@ public class ConnectionMixin {
 
     @Inject(method = "initChannel", at = @At("HEAD"))
     private void injectProxyHandler(Channel channel, CallbackInfo ci) {
-        try {
-            if (System.getProperty("socksProxyHost") != null)
-                channel.pipeline().addFirst(new Socks5ProxyHandler(new InetSocketAddress(
-                        System.getProperty("socksProxyHost"),
-                        Integer.parseInt(System.getProperty("socksProxyPort"))))
-                );
-        } finally {
-
+        String host = System.getProperty("socksProxyHost");
+        if (host == null || host.isBlank()) {
+            return;
         }
+
+        int port = Integer.getInteger("socksProxyPort", 1080);
+        channel.pipeline().addFirst(new Socks5ProxyHandler(new InetSocketAddress(host, port)));
     }
 }
